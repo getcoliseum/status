@@ -3,11 +3,14 @@
 owner: getcoliseum
 repo: status
 
+# Set icon on every site: without it Upptime loads favicons from icons.duckduckgo.com (a third party).
 sites:
   - name: Website
     url: https://getcoliseum.com/
+    icon: https://status.getcoliseum.com/favicon.svg
   - name: Join the test
     url: https://getcoliseum.com/join/
+    icon: https://status.getcoliseum.com/favicon.svg
 
 status-website:
   cname: status.getcoliseum.com
