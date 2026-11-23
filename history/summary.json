@@ -2,7 +2,7 @@
   {
     "name": "Website",
     "url": "https://getcoliseum.com/",
-    "icon": "https://icons.duckduckgo.com/ip3/getcoliseum.com.ico",
+    "icon": "https://status.getcoliseum.com/favicon.svg",
     "slug": "website",
     "status": "up",
     "uptime": "100.00%",
@@ -20,7 +20,7 @@
   {
     "name": "Join the test",
     "url": "https://getcoliseum.com/join/",
-    "icon": "https://icons.duckduckgo.com/ip3/getcoliseum.com.ico",
+    "icon": "https://status.getcoliseum.com/favicon.svg",
     "slug": "join-the-test",
     "status": "up",
     "uptime": "100.00%",
