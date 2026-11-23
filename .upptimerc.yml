@@ -14,6 +14,12 @@ status-website:
   name: Coliseum status
   introTitle: "Coliseum status"
   introMessage: "Live checks of Coliseum's public pages, run every few minutes."
+  # Coliseum brand theme (assets/coliseum.css). Fonts and logos are self-hosted; no third-party requests.
+  themeUrl: /coliseum.css
+  logoUrl: /coliseum-logo.svg
+  logoHref: /
+  faviconSvg: /favicon.svg
+  favicon: /apple-touch-icon.png
   navbar:
     - title: Status
       href: /
