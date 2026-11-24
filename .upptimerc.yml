@@ -21,6 +21,10 @@ status-website:
   # Full same-origin URLs on purpose: the export crawler turns root paths into 404 folders, which breaks the asset copy.
   themeUrl: https://status.getcoliseum.com/coliseum.css
   logoUrl: https://status.getcoliseum.com/coliseum-logo.svg
+  # SEC-ALL-PRODUCTS-1 stopgap (gate, 24 Nov): GitHub Pages cannot send security headers, so set CSP and Referrer-Policy as meta tags.
+  # 'unsafe-inline' is needed for Sapper's inline boot scripts and Svelte's injected styles (their hashes change per page and per release).
+  customHeadHtml: |-
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://raw.githubusercontent.com; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; font-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin">
   logoHref: /
   faviconSvg: https://status.getcoliseum.com/favicon.svg
   favicon: https://status.getcoliseum.com/apple-touch-icon.png
