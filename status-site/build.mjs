@@ -29,7 +29,7 @@ cpSync(join(here, "app", "package-lock.json"), join(work, "package-lock.json"));
 // pre-process.ts and post-process.ts read ../.upptimerc.yml from the work folder.
 cpSync(join(repo, ".upptimerc.yml"), join(here, ".upptimerc.yml"));
 
-run("npm ci --no-audit --no-fund --loglevel=error", work);
+run("npm ci --ignore-scripts --no-audit --no-fund --loglevel=error", work);
 run("npm run export", work);
 
 cpSync(join(work, "__sapper__", "export"), dist, { recursive: true });
