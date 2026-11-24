@@ -1,5 +1,6 @@
 # Security headers for status.getcoliseum.com on Cloudflare Pages (SEC-ALL-PRODUCTS-1, gate option 1).
-# Same set as getcoliseum.com. 'unsafe-inline' is needed for Sapper's inline boot script and Svelte's injected styles.
+# Same set as getcoliseum.com. build.mjs replaces script-src 'unsafe-inline' with the sha256 of each inline Sapper script.
+# style-src 'unsafe-inline' stays for Svelte's injected styles (accepted low risk, same as getcoliseum.com).
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://raw.githubusercontent.com; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; font-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains

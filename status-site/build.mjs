@@ -6,6 +6,7 @@
 import { execSync } from "node:child_process";
 import { cpSync, rmSync, mkdirSync, existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -49,5 +50,17 @@ for (const f of readdirSync(dist).filter((n) => n.endsWith(".html"))) {
   patched++;
 }
 if (patched === 0) throw new Error("no pages patched");
+
+// Allow only the exact inline scripts Sapper wrote, by hash, instead of 'unsafe-inline' for scripts.
+const hashes = new Set();
+for (const f of readdirSync(dist).filter((n) => n.endsWith(".html"))) {
+  const html = readFileSync(join(dist, f), "utf8");
+  if (/<script(?![^>]*\bsrc=)[^>]+>/.test(html) || /\son[a-z]+=/i.test(html)) throw new Error(`unexpected inline script form in ${f}`);
+  for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) hashes.add(`'sha256-${createHash("sha256").update(m[1]).digest("base64")}'`);
+}
+const marker = "script-src 'self' 'unsafe-inline';";
+const headers = readFileSync(join(dist, "_headers"), "utf8");
+if (!headers.includes(marker) || hashes.size === 0) throw new Error("cannot pin inline script hashes in _headers");
+writeFileSync(join(dist, "_headers"), headers.replace(marker, `script-src 'self' ${[...hashes].sort().join(" ")};`));
 rmSync(join(dist, "CNAME"), { force: true }); // GitHub Pages only
-console.log("status-site built:", readdirSync(dist).length, "entries in dist,", patched, "pages patched, status-page", pinned);
+console.log("status-site built:", readdirSync(dist).length, "entries in dist,", patched, "pages patched,", hashes.size, "inline script hashes, status-page", pinned);
