@@ -1,0 +1,14 @@
+{
+  "name": "coliseum-status-site",
+  "private": true,
+  "description": "Builds status.getcoliseum.com on Cloudflare Pages from a pinned @upptime/status-page (gate: OWASP A06).",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "@upptime/status-page": "1.17.0"
+  }
+}

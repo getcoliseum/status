@@ -1,0 +1,13 @@
+# OWASP A06 (gate): watch the pinned status page build. Every update is a PR that goes through the gate.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /status-site
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+  - package-ecosystem: npm
+    directory: /status-site/app
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
